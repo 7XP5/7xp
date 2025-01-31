@@ -87,50 +87,6 @@ local Image = AddImageLabel(Main6, {
 local section = AddSection(Main6, {"Coowner"})
 SetSection(section, "Owner : x_lt")
 
-
--- تخزين عدد الزوار في متغير
-local dataStore = game:GetService("DataStoreService"):GetDataStore("VisitorCount")
-
--- دالة لزيادة عدد الزوار وعرضه
-local function increaseAndDisplayVisitorCount(player)
-    local success, currentCount = pcall(function()
-        return dataStore:GetAsync("visitorCount")
-    end)
-
-    if success then
-        -- إذا كانت النتيجة غير موجودة، نعيد العدد إلى 0
-        if not currentCount then
-            currentCount = 0
-        end
-
-        -- زيادة العدد
-        currentCount = currentCount + 1
-
-        -- حفظ العدد الجديد
-        local saveSuccess, errorMessage = pcall(function()
-            dataStore:SetAsync("visitorCount", currentCount)
-        end)
-
-        if saveSuccess then
-            print("عدد الزوار الحالي: " .. currentCount)
-
-            -- إضافة عدد الزوار إلى الواجهة (UI)
-            local section = AddSection(Main6, {"UserId"})
-            SetSection(section, "Player acript: "\nVisitor Count: " .. currentCount)
-        else
-            warn("حدث خطأ أثناء حفظ العدد: " .. errorMessage)
-        end
-    else
-        warn("حدث خطأ أثناء استرجاع العدد: " .. currentCount)
-    end
-end
-
--- استدعاء دالة الزيادة عند دخول لاعب جديد
-game.Players.PlayerAdded:Connect(function(player)
-    increaseAndDisplayVisitorCount(player)
-end)
-
-
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
@@ -241,7 +197,7 @@ AddButton(Main2, {
   AddButton(Main2, {
 	Name = "شاليه محمد",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/SnoobG/Lua-Script-s/refs/heads/main/Tvon%20Hub%20Shaleh%20m7md"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/SnoobG/Lua-Script-s/refs/heads/main/Tvon%20Hub%20Shaleh%20m7md%20V2))()
 	end
   })
 
@@ -377,7 +333,7 @@ local section = AddSection(Main8, {"pa"})
 SetSection(section, "شاليه محمد")
 
 AddButton(Main8, {
-  Name = "سكربت نسخ قوي شاليه محمد لاتشغله غير بحالات حرجه لانه مايتوقف",
+  Name = "نقاط في شات",
   Callback = function()
 
       -- Function to send a message to the chat
@@ -402,35 +358,6 @@ end
 
 
 
-AddButton(Main, {
-  Name = "تشغيل أمر HD Admin",
-  Callback = function()
-    local function sendMessage(message)
-      local chatEvent = game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents")
-      if chatEvent and chatEvent:FindFirstChild("SayMessageRequest") then
-          chatEvent.SayMessageRequest:FireServer(message, "All")
-      else
-          warn("نظام الشات الافتراضي غير موجود")
-      end
-  end
-
-  -- تنفيذ أمر HD Admin
-  local function executeHDAdminCommand(command)
-      local hdAdminEvent = game:GetService("ReplicatedStorage"):FindFirstChild("HDAdminEvent") -- تأكد من وجود الحدث
-      if hdAdminEvent then
-          hdAdminEvent:FireServer(command)
-      else
-          warn("لم يتم العثور على HDAdminEvent في ReplicatedStorage")
-      end
-  end
-
-  -- إرسال الرسالة في الشات
-  sendMessage(";char me ARDA41442") -- هذا الأمر يظهر في الشات
-
-  -- تنفيذ الأمر عبر HD Admin
-  executeHDAdminCommand(";char me ARDA41442") -- تأكد أن الأمر متوافق مع HD Admin
-end
-})
 
 
 
